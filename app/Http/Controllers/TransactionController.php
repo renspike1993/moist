@@ -34,6 +34,20 @@ class TransactionController extends Controller
         return redirect()->route('get_requests', ['id' => $tracking_id, 'documents' => $documents]);
     }
 
+    public function update_transaction(Request $request)
+    {
+        DB::table('transactions')
+            ->where('id', $request->transaction_id)
+            ->update(
+                [
+                    'or_num' => $request->or_number,
+                    'or_date' => $request->or_date
+                ],
+            );
+
+        return redirect()->back()->with('success', 'Paid Sucessfully.');
+    }
+
     public function store_request(Request $request)
     {
 
@@ -41,7 +55,7 @@ class TransactionController extends Controller
             'copies' => $request->copies,
             'transaction_id' => $request->transaction_id,
             'document_id' => $request->document_id,
-            'purpose'   =>$request->purpose,
+            'purpose'   => $request->purpose,
         ]);
 
         return redirect()->back()->with('success', 'Added sucessfully.');
@@ -53,25 +67,29 @@ class TransactionController extends Controller
         $requests = DB::table('requests')
             ->join('transactions', 'requests.transaction_id', '=', 'transactions.id')
             ->join('documents', 'requests.document_id', '=', 'documents.id')
-            ->select('transactions.*', 'requests.*', 'documents.*','transactions.student_id as stud_id')
+            ->select('transactions.*', 'requests.*', 'documents.*', 'transactions.student_id as stud_id')
             ->where('transactions.id', '=', $trans_id)
             ->get();
 
         $documents = DB::table('documents')->get();
+
+        $transaction  = DB::table('transactions')
+            ->where('id',$trans_id)
+            ->first();
 
         $transaction_id = $trans_id;
         $total_amount = 0;
 
 
         $student = DB::table('transactions')
-            ->join('students','transactions.student_id','=','students.id')
-            ->where('transactions.id',$trans_id)
+            ->join('students', 'transactions.student_id', '=', 'students.id')
+            ->where('transactions.id', $trans_id)
             ->first();
 
-        foreach($requests as $request){
+        foreach ($requests as $request) {
             $total_amount += $request->fee * $request->copies;
         }
 
-        return view('forms.request', compact('requests', 'transaction_id', 'documents','total_amount','student'));
+        return view('forms.request', compact('requests', 'transaction_id', 'documents', 'total_amount', 'student'));
     }
 }

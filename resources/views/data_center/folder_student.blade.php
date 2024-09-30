@@ -16,7 +16,7 @@
                         <input type="submit" value="Add to Folder">
                         <input type="hidden" name="folder_id" value="{{ $folder_id }}">
                         @csrf
-                        <table id="dataTableExample" class="table">
+                        <table id="dataTableEample" class="table">
                             <thead>
                                 <tr>
                                     <th>#</th>

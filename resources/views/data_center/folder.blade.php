@@ -64,11 +64,11 @@
                     <div class="modal-body">
                         @csrf
                         <label for="cabinet_name">Folder Name</label>
-                        <input type="text" name="folder_name" class="form-control">
+                        <input type="text" name="folder_name" class="form-control" required>
                         <br>
                         <label for="cabinet_id">Cabinet</label>
-                        <select name="cabinet_id" class="form-control">
-                            <option disabled selected>Select Cabinet</option>
+                        <select name="cabinet_id" class="form-control" required>
+                            <option value="" disabled selected>Select Cabinet</option>
                             @foreach($cabinets as $cabinet)
                             <option value="{{ $cabinet->id }}">{{ $cabinet->name }}</option>
                             @endforeach

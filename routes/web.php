@@ -30,18 +30,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/change_theme', [User::class, 'change_theme'])->name('change_theme');
 
 
-    Route::get('/students',             [StudentController::class, 'students'])->name('students');
-
+    Route::get('/students',                   [StudentController::class, 'students'])->name('students');
+    Route::post('/store_student',             [StudentController::class, 'store_student'])->name('store_student');
+    Route::get('/destroy_student/{id}',       [StudentController::class, 'destroy_student'])->name('destroy_student');
+    
 
     // --------------------- Transaction Controller -----------------------------------
 
 
-    Route::get('/requests',             [TransactionController::class, 'requests'])->name('requests');
-    Route::get('/get_requests/{id}',     [TransactionController::class, 'get_requests'])->name('get_requests');
+    Route::get('/requests',                 [TransactionController::class, 'requests'])->name('requests');
+    Route::get('/get_requests/{id}',        [TransactionController::class, 'get_requests'])->name('get_requests');
 
 
     Route::post('/store_transaction',     [TransactionController::class, 'store_transaction'])->name('store_transaction');
     Route::post('/store_request',         [TransactionController::class, 'store_request'])->name('store_request');
+    Route::post('/update_transaction',         [TransactionController::class, 'update_transaction'])->name('update_transaction');
+
 
 
     // --------------------- Data Center Controller -----------------------------------

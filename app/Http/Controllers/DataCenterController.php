@@ -29,6 +29,7 @@ class DataCenterController extends Controller
 
     public function get_specific_cabinet()
     {
+        return view();
     }
 
     public function get_specific_folder()
@@ -67,6 +68,7 @@ class DataCenterController extends Controller
 
         $students = DB::table('students')
             ->join('folders', 'students.folder_id', '=', 'folders.id')
+            ->select('folders.*','students.*','students.id as stud_id')
             ->where('folders.id', $id)
             ->get();
 
@@ -77,6 +79,7 @@ class DataCenterController extends Controller
         return view('data_center.folder_content', compact('students', 'folder'));
     }
 
+    
 
     public function create_cabinet(Request $request)
     {
@@ -96,5 +99,13 @@ class DataCenterController extends Controller
             'cabinet_id' => $request->cabinet_id,
         ]);
         return back()->with('success', 'Folder successfully created.');
+    }
+
+
+    public function delete_student_from_folder($id)
+    {
+        DB::table('students')
+        ->where('id', $id)
+        ->update(['folder_id' => null]);
     }
 }

@@ -2,11 +2,22 @@
 
 @section('title','Students')
 
-
 @section('content')
 
+<!-- Loading spinner -->
+<div id="loading" class="row justify-content-center">
+    <div class="col-md-3">
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <p>Loading students, please wait...</p>
+        </div>
+    </div>
+</div>
 
-<div class="row">
+<!-- Student list (hidden by default) -->
+<div id="student-table" class="row" style="display:none;">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -40,12 +51,7 @@
                                             <i class="btn-icon-prepend" data-feather="plus"></i>
                                             Request
                                         </button>
-<!-- 
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="link-icon" data-feather="plus"></i> Request
-                                        </button> -->
                                     </form>
-
                                 </td>
                             </tr>
                             @endforeach
@@ -57,4 +63,17 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    // Once the document is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        // Hide the loading spinner
+        document.getElementById('loading').style.display = 'none';
+
+        // Show the student table
+        document.getElementById('student-table').style.display = 'block';
+    });
+</script>
 @endsection

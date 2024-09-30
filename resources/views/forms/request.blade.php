@@ -25,9 +25,19 @@
                             ₱ {{ number_format($total_amount, 2) }}
                         </h4>
 
-                        <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2" style="color:red;"><span class="text-muted">Status :</span> Unpaid</h6>
-                        <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2"><span class="text-muted">OR No. :</span> -- -- --</h6>
-                        <h6 class="text-right font-weight-normal"><span class="text-muted">OR Date :</span> -- -- --</h6>
+                        <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2" style="color:red;">
+                            <span class="text-muted">Status :</span>
+                            Unpaid
+                        </h6>
+                        <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2">
+                            <span class="text-muted">OR No. :</span>
+                            -- -- --
+                        </h6>
+                        <h6 class="text-right font-weight-normal">
+                            <span class="text-muted"> OR Date :</span>
+                            -- -- --
+                        </h6>
+                        
                     </div>
                 </div>
                 <div class="container-fluid mt-5 d-flex justify-content-center w-100">
@@ -98,32 +108,36 @@
                     <div class="row">
                         <div class="col-md-6 ml-auto">
                             <div class="table-responsive">
-                                <form action="">
+                                <form action="{{ route('update_transaction') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="transaction_id" value="{{ $transaction_id }}">
                                     <table class="table">
                                         <tbody>
                                             <tr>
                                                 <td>OR Number </td>
                                                 <td class="text-right">
-                                                    <input type="text" class="form-control" placeholder="Enter 6-digit number">
+                                                    <input type="text" class="form-control" name="or_number" placeholder="Enter 6-digit number" required>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>OR Date</td>
                                                 <td class="text-right">
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" name="or_date" class="form-control" required>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Confirmed by:</td>
-                                                <td class="text-bold-800 text-left">{{ Auth::user()->name }}</td>
+                                                <td class="text-bold-800 text-left">
+                                                    {{ Auth::user()->name }}
+                                                </td>
+
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <div class="container-fluid w-100">
-                                                        <a href="#" class="btn btn-primary float-right mt-4 ml-2"><i data-feather="save" class="mr-3 icon-md"></i>Confirmed</a>
+                                                        <button type="submit" class="btn btn-primary float-right mt-4 ml-2"><i data-feather="save" class="mr-3 icon-md"></i>Confirmed</button>
                                                         <a href="#" class="btn btn-outline-primary float-right mt-4"><i data-feather="printer" class="mr-2 icon-md"></i>Print</a>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                         </tbody>

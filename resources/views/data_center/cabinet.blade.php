@@ -31,7 +31,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $cabinet->name }}</td>
                                 <td>
-                                    <a href="route('')" class="btn btn-outline-primary">Open Cabinet</a>
+                                    <a href="" class="btn btn-outline-primary">Open Cabinet</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -45,31 +45,31 @@
 
 
 
-				
-			<div class="example">	            
-	              <!-- Modal -->
-	             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	                <div class="modal-dialog modal-dialog" role="document">
-	                  <div class="modal-content">
-	                    <div class="modal-header">
-	                      <h5 class="modal-title" id="exampleModalCenterTitle">Add Cabinet</h5>
-	                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                        <span aria-hidden="true">&times;</span>
-	                      </button>
-	                    </div>
-	                    <form action="{{ route('create_cabinet') }}" method="POST">
-		                    <div class="modal-body">		                      
-		                      	@csrf
-		                      	<label for="cabinet_name">Cabinet Name</label>
-		                      	<input type="text" name="cabinet_name" class="form-control">		                     
-		                    </div>
-		                    <div class="modal-footer">
-		                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		                      <button type="submit" class="btn btn-primary">Save changes</button>
-		                    </div>
-	                    </form>
-	                  </div>
-	                </div>
-	             </div>
-			</div>
+
+<div class="example">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Add Cabinet</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('create_cabinet') }}" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        <label for="cabinet_name">Cabinet Name</label>
+                        <input type="text" name="cabinet_name" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
