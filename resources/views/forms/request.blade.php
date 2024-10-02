@@ -25,19 +25,36 @@
                             ₱ {{ number_format($total_amount, 2) }}
                         </h4>
 
+                        @if($student->or_num)
+                        <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2" style="color:green;">
+                            <span class="text-muted">Status :</span>
+                            Paid
+                        </h6>
+                        <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2">
+                            <span class="text-muted">OR No. : </span>
+                            {{ $student->or_num }}
+                        </h6>
+                        <h6 class="text-right font-weight-normal">
+                            <span class="text-muted"> OR Date :</span>
+                            {{ $student->or_date }}
+                        </h6>
+                        @else
                         <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2" style="color:red;">
                             <span class="text-muted">Status :</span>
                             Unpaid
                         </h6>
                         <h6 class="mb-0 mt-3 text-right font-weight-normal mb-2">
-                            <span class="text-muted">OR No. :</span>
-                            -- -- --
+                            <span class="text-muted">OR No. : </span>
+                            000000
                         </h6>
                         <h6 class="text-right font-weight-normal">
                             <span class="text-muted"> OR Date :</span>
-                            -- -- --
+                            00-00-00
                         </h6>
-                        
+                        @endif
+
+
+
                     </div>
                 </div>
                 <div class="container-fluid mt-5 d-flex justify-content-center w-100">
@@ -55,6 +72,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                use Carbon\Carbon;
+
+                                @endphp
+
+
                                 <?php $counter = 0; ?>
                                 @foreach($requests as $request)
                                 <?php $counter++ ?>
@@ -65,7 +88,14 @@
                                     <td class="text-right">{{ $request->copies }}</td>
                                     <td>₱ {{ $request->fee }}</td>
                                     <td>₱ {{ $request->copies * $request->fee }}</td>
+                                    @if($request->or_date)
+                                    @php                                    
+                                    $newDate = Carbon::parse($request->or_date)->addDays($request->duration)->toDateString();
+                                    @endphp
+                                    <td>{{ $newDate }}</td>
+                                    @else
                                     <td>{{ $request->duration }} day(s)</td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

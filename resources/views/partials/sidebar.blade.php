@@ -51,6 +51,25 @@
             </a>
         </li>
 
+        <li class="nav-item nav-category">subordinates</li>
+
+        <li class="nav-item">
+            <a href="{{ route('get_encoder_request') }}" class="nav-link">
+                <i class="link-icon" data-feather="layout"></i>
+                <span class="link-title">Encoder</span>
+            </a>
+        </li>
+
+        
+        <li class="nav-item">
+            <a href="{{ route('get_checker_request') }}" class="nav-link">
+                <i class="link-icon" data-feather="check-circle"></i>
+                <span class="link-title">Checker</span>
+            </a>
+        </li>
+
+
+
         <!-- 
         <li class="nav-item nav-category">Components</li>
         <li class="nav-item">
