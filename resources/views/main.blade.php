@@ -107,6 +107,24 @@
     </script>
     @endif
 
+    @if ($errors->any())
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Validation Errors',
+            html: `
+                <ul style="text-align: left;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            `,
+            showConfirmButton: true
+        });
+    </script>
+    @endif
+    
 </body>
 
 </html>

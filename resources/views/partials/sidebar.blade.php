@@ -11,13 +11,21 @@
 <div class="sidebar-body">
     <ul class="nav">
         <li class="nav-item nav-category">Main</li>
+
         <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('dashboard') }}" class="nav-link">
                 <i class="link-icon" data-feather="box"></i>
                 <span class="link-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item nav-category">Records</li>
+        <li class="nav-item">
+            <a href="{{ route('get_documents') }}" class="nav-link">
+                <i class="link-icon" data-feather="box"></i>
+                <span class="link-title">Documents</span>
+            </a>
+        </li>
+
+        <li class="nav-item nav-category">Files</li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
                 <i class="link-icon" data-feather="database"></i>
@@ -32,16 +40,17 @@
                     <li class="nav-item">
                         <a href="{{route('get_folders')}}" class="nav-link">Folders</a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="{{ route('students') }}" class="nav-link">Students</a>
+                        <a href="{{ route('get_documents') }}" class="nav-link">Search Student</a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a href="{{ route('get_documents') }}" class="nav-link">
-                <i class="link-icon" data-feather="folder"></i>
-                <span class="link-title">Documents</span>
+            <a href="{{ route('students') }}" class="nav-link">
+                <i class="link-icon" data-feather="users"></i>
+                <span class="link-title">Students</span>
             </a>
         </li>
         <li class="nav-item">
@@ -51,16 +60,21 @@
             </a>
         </li>
 
-        <li class="nav-item nav-category">subordinates</li>
+        <li class="nav-item nav-category">Promotional Report</li>
+        <li class="nav-item">
+            <a href="{{ route('list_tor') }}" class="nav-link">
+                <i class="link-icon" data-feather="layout"></i>
+                <span class="link-title">Enrollments</span>
+            </a>
+        </li>
 
+        <li class="nav-item nav-category">subordinates</li>
         <li class="nav-item">
             <a href="{{ route('get_encoder_request') }}" class="nav-link">
                 <i class="link-icon" data-feather="layout"></i>
                 <span class="link-title">Encoder</span>
             </a>
         </li>
-
-        
         <li class="nav-item">
             <a href="{{ route('get_checker_request') }}" class="nav-link">
                 <i class="link-icon" data-feather="check-circle"></i>

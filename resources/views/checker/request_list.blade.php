@@ -39,7 +39,7 @@
 
                                     <a href="{{ asset('storage/' . $request->form9_path) }}" class="btn btn-secondary btn-icon-text" download>
                                         <i class="btn-icon-prepend" data-feather="download"></i>
-                                        FORM - IX
+                                        FORM - 9
                                     </a>
 
                                 </td>

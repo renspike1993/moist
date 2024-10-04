@@ -5,11 +5,12 @@ use App\Http\Controllers\DataCenterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CheckerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EncoderController;
 use App\Http\Controllers\FileController;
 
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\TorController;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [User::class, 'index'])->middleware(['auth', 'verified'])->name('main');
 
 Route::middleware('auth')->group(function () {
+
+
+
+
+
+    Route::get('/dashboard', [DashboardController::class, 'summary'])->name('dashboard');
+
 
     Route::get('/change_theme', [User::class, 'change_theme'])->name('change_theme');
 
@@ -76,6 +84,13 @@ Route::middleware('auth')->group(function () {
     // -------------------- File Controller ----------------------------------- 
     Route::post('/upload_file',         [FileController::class, 'upload_file'])->name('upload_file');
     Route::get('/download_file/{id,type}',         [Documents::class, 'download_file'])->name('download_file');
+
+    // -------------------- TorController ---------------------------
+    Route::get('/list_tor',         [TorController::class, 'list_tor'])->name('list_tor');
+    Route::get('/view-records/{fullname}',              [TorController::class, 'view_tor'])->name('view-records');
+    // Route::get('/view-permanent-records/{fullname}',    [TorController::class, 'get_permanent_records'])->name('view-permanent-records');
+    // Route::get('/view-form9/{fullname}',                [TorController::class, 'view_form9'])->name('view-form9');
+
 
 });
 

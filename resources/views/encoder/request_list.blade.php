@@ -36,7 +36,8 @@
                                     {{ $request->name }}
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" request-id="{{ $request->req_id }}" data-toggle="modal" data-target="#exampleModalCenter" onclick="setRequestId(this)">
+                                    <button type="button" class="btn btn-primary btn-icon-text" request-id="{{ $request->req_id }}" data-toggle="modal" data-target="#exampleModalCenter" onclick="setRequestId(this)">
+                                        <i class="btn-icon-prepend" data-feather="paperclip"></i>
                                         Attach Files
                                     </button>
                                 </td>
@@ -59,7 +60,7 @@
         <div class="modal-dialog modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Add Cabinet</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Attach Files</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
