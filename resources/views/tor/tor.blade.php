@@ -100,7 +100,7 @@
                 </tr>
             </table>
 
-            <table style="margin-left: 22px; width:95%; padding-top:19px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; ">
+            <table style="margin-left: 22px; width:95%; padding-top:18px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; ">
                 <tr>
                     <td width="25%" style="border: none; ">OCTOBER 10, 1993</td>
                     <td width="70.5%" style="border: none;">PROVINCIAL HOSPITAL, BALINGASAG, MISAMIS ORIENTAL </td>
@@ -111,7 +111,7 @@
             </table>
 
 
-            <!-- <div class="qr" style="padding-top:1040px; padding-left:370px;">
+            <!-- <div class="qr" style="padding-top:540px; padding-left:370px;">
                 <img src="{{ asset('qr.png') }}" alt="" height="100px">
             </div> -->
         </div>
@@ -244,7 +244,8 @@
         // Wait for the content to be fully loaded, then print
         printWindow.onload = function() {
             printWindow.focus(); // Needed for some browsers
-            printWindow.print();
+            tor.style.display = "none";
+            printWindow.print();            
             printWindow.close();
             history.back();
         };
