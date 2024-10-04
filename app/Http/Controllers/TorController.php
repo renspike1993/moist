@@ -36,72 +36,14 @@ class TorController extends Controller
 
 
         for ($i = 0; $i < count($records); $i++) {
-            // $temp = [
-
-            //         [          
-
-            //             "subject" => $records[$i]->subA,
-            //             "grade" => $records[$i]->gradeA,
-            //             "unit" => $records[$i]->unitA,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subB,
-            //             "grade" => $records[$i]->gradeB,
-            //             "unit" => $records[$i]->unitB,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subC,
-            //             "grade" => $records[$i]->gradeC,
-            //             "unit" => $records[$i]->unitC,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subD,
-            //             "grade" => $records[$i]->gradeD,
-            //             "unit" => $records[$i]->unitD,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subE,
-            //             "grade" => $records[$i]->gradeE,
-            //             "unit" => $records[$i]->unitE,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subF,
-            //             "grade" => $records[$i]->gradeF,
-            //             "unit" => $records[$i]->unitF,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subG,
-            //             "grade" => $records[$i]->gradeG,
-            //             "unit" => $records[$i]->unitG,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subH,
-            //             "grade" => $records[$i]->gradeH,
-            //             "unit" => $records[$i]->unitH,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subI,
-            //             "grade" => $records[$i]->gradeI,
-            //             "unit" => $records[$i]->unitI,
-            //         ],
-            //         [
-            //             "subject" => $records[$i]->subK,
-            //             "grade" => $records[$i]->gradeK,
-            //             "unit" => $records[$i]->unitK,
-            //         ],
-            //     ],
-            // ];
-
-
             $cnt = 0;
-
             if (($records[$i]->subA != "")) {
 
                 $data[] = [
-                    "ay" => $records[$i]->ay,
+                    "ay" => $records[$i]->semester . ' Sem',
                     "semester" => $records[$i]->semester,
                     "subject" => $records[$i]->subA,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subA),
                     "grade" => $records[$i]->gradeA,
                     "unit" => $records[$i]->unitA,
                 ];
@@ -109,10 +51,10 @@ class TorController extends Controller
 
             if (($records[$i]->subB != "")) {
                 $data[] = [
-                    "ay" => '',
+                    "ay" => $records[$i]->ay . '-' . $records[$i]->ay + 1,
                     "semester" => '',
                     "subject" => $records[$i]->subB,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subB),
                     "grade" => $records[$i]->gradeB,
                     "unit" => $records[$i]->unitB,
                 ];
@@ -123,7 +65,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subC,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subC),
                     "grade" => $records[$i]->gradeC,
                     "unit" => $records[$i]->unitC,
                 ];
@@ -134,7 +76,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subD,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subD),
                     "grade" => $records[$i]->gradeD,
                     "unit" => $records[$i]->unitD,
                 ];
@@ -145,7 +87,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subE,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subE),
                     "grade" => $records[$i]->gradeE,
                     "unit" => $records[$i]->unitE,
                 ];
@@ -156,7 +98,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subF,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subF),
                     "grade" => $records[$i]->gradeF,
                     "unit" => $records[$i]->unitF,
                 ];
@@ -167,7 +109,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subG,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subG),
                     "grade" => $records[$i]->gradeG,
                     "unit" => $records[$i]->unitG,
                 ];
@@ -178,7 +120,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subH,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subH),
                     "grade" => $records[$i]->gradeH,
                     "unit" => $records[$i]->unitH,
                 ];
@@ -189,7 +131,7 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subI,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subI),
                     "grade" => $records[$i]->gradeI,
                     "unit" => $records[$i]->unitI,
                 ];
@@ -200,12 +142,23 @@ class TorController extends Controller
                     "ay" => '',
                     "semester" => '',
                     "subject" => $records[$i]->subJ,
-                    "descriptive"=>$this->get_sub($records[$i]->subA),
+                    "descriptive" => $this->get_sub($records[$i]->subJ),
                     "grade" => $records[$i]->gradeJ,
                     "unit" => $records[$i]->unitJ,
                 ];
             }
         }
+
+
+        $data[] = [
+            "ay" => 'closed',
+            "semester" => '',
+            "subject" => '',
+            "descriptive" => '',
+            "grade" => '',
+            "unit" => '',
+        ];
+
 
         $pages[] = null;
 
@@ -236,9 +189,10 @@ class TorController extends Controller
 
         for ($xtra_cell = 0; $xtra_cell < $add_cell; $xtra_cell++) {
             $data[] = [
-                "ay" => '',
+                "ay" => '-',
                 "semester" => '',
-                "subject" => '-',
+                "subject" => '',
+                "descriptive" => '',
                 "grade" => '',
                 "unit" => '',
             ];
@@ -263,7 +217,7 @@ class TorController extends Controller
 
 
         // echo $row_per_pages * count($pages)."<br>".count($data);
-       
+        // echo json_encode($pages);
         return view('tor.tor', compact('pages'));
     }
 
@@ -271,9 +225,9 @@ class TorController extends Controller
     public function get_sub($sub)
     {
         $subject = DB::table('subject')
-        ->where('subject', 'Eng 011')
-        ->select('descriptive')
-        ->first();
+            ->where('subject', $sub)
+            ->select('descriptive')
+            ->first();
 
         return $subject ? $subject->descriptive : 'N/A';
     }

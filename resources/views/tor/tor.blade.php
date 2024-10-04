@@ -1,5 +1,6 @@
 @extends('main')
 
+@section('title','Transcrits of Record')
 
 
 @section('content')
@@ -17,7 +18,7 @@
             border: 1px solid gray;
         }
 
-        table {
+        .table {
             border-collapse: collapse;
             width: 90%;
         }
@@ -29,7 +30,7 @@
             background-position: center;
             background-repeat: no-repeat;
             /* padding: 20px; */
-            height: 1175px;
+            height: 1225px;
         }
 
         .background {
@@ -56,27 +57,72 @@
             text-align: center;
             font-size: 13px;
         }
+
+
+        .test {
+            border: 1px solid gray;
+        }
+
+        .lineA {
+            /* display: flex; */
+            /* justify-content: center; */
+            padding-left: 30px;
+            padding-right: 30px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
     </style>
 
 
 
 
-    <div class="container-fluid" id="front">
+    <div class="container" id="front">
 
 
         <div class="front">
-            <div class="qr" style="padding-top:1000px; padding-left:370px;">
+
+
+            <table style="margin-left: 22px; width:95%; padding-top:225px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; ">
+                <tr>
+                    <td width="25%" style="border: none; ">CABUHAN</td>
+                    <td width="31.3%" style="border: none;">RENE II</td>
+                    <td width="25%" style="border: none;">MACABECHA</td>
+                    <td style="border: none;">C17-0061</td>
+                </tr>
+            </table>
+
+            <table style="margin-left: 22px; width:95%; padding-top:19px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; ">
+                <tr>
+                    <td width="25%" style="border: none; ">FILIPINO</td>
+                    <td width="18.5%" style="border: none;">MALE</td>
+                    <td width="19%" style="border: none;">SINGLE</td>
+                    <td style="border: none;">ROMAN CATHOLIC</td>
+                </tr>
+            </table>
+
+            <table style="margin-left: 22px; width:95%; padding-top:19px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; ">
+                <tr>
+                    <td width="25%" style="border: none; ">OCTOBER 10, 1993</td>
+                    <td width="70.5%" style="border: none;">PROVINCIAL HOSPITAL, BALINGASAG, MISAMIS ORIENTAL </td>
+                    <td width="" style="border: none;">  </td>
+                    <td width="" style="border: none;">  </td>
+
+                </tr>
+            </table>
+
+
+            <!-- <div class="qr" style="padding-top:1040px; padding-left:370px;">
                 <img src="{{ asset('qr.png') }}" alt="" height="100px">
-            </div>
+            </div> -->
         </div>
     </div>
 
 
     @foreach ($pages as $pageIndex => $page)
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="background">
             <div style="padding-top:220px; display: flex; justify-content: center; " style="text-align: center;">
-                <table width="90%" class="main-table">
+                <table width="90%" class="table">
                     <thead>
                         <tr>
                             <th width="10%;" rowspan="2" class="b_td">Term</th>
@@ -92,14 +138,29 @@
                     </thead>
                     <tbody>
                         @foreach($page as $p)
+                        @if($p['ay']=="closed")
+                        <tr>
+                            <td colspan="6" class="normal-text" style="text-align: center;">-x-x-x- -x-x-x- Transcript closed and nothing follows -x-x-x- -x-x-x-</td>
+                        </tr>
+                        @elseif($p['ay']=="-")
+                        <tr>
+                            <td class="normal-text">&nbsp;</td>
+                            <td class="normal-text"></td>
+                            <td class="normal-text"></td>
+                            <td class="num"></td>
+                            <td class="num"></td>
+                            <td class="num"></td>
+                        </tr>
+                        @else
                         <tr>
                             <td class="normal-text">{{ $p['ay'] }}</td>
                             <td class="normal-text">{{ $p['subject'] }}</td>
-                            <td class="normal-text"></td>
+                            <td class="normal-text">{{ $p['descriptive'] }}</td>
                             <td class="num">{{ $p['grade'] }}</td>
                             <td class="num"></td>
                             <td class="num">{{ $p['unit'] }}</td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -185,7 +246,7 @@
             printWindow.focus(); // Needed for some browsers
             printWindow.print();
             printWindow.close();
-            // history.back();
+            history.back();
         };
     }
 </script>
