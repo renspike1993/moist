@@ -45,5 +45,19 @@ class FileController extends Controller
         return back()->with('success', 'Files uploaded successfully.');
     }
 
+
+    public function search()
+    {
+        $files = DB::table('students')
+        ->join('folders','students.folder_id','=','folders.id')
+        ->join('cabinets','folders.cabinet_id','=','cabinets.id')
+        ->get();
+
+        // echo $files;
+
+        return view('files.search',compact('files'));
+
+    }
+
     
 }

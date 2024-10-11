@@ -104,16 +104,16 @@
                 <tr>
                     <td width="25%" style="border: none; ">OCTOBER 10, 1993</td>
                     <td width="70.5%" style="border: none;">PROVINCIAL HOSPITAL, BALINGASAG, MISAMIS ORIENTAL </td>
-                    <td width="" style="border: none;">  </td>
-                    <td width="" style="border: none;">  </td>
+                    <td width="" style="border: none;"> </td>
+                    <td width="" style="border: none;"> </td>
 
                 </tr>
             </table>
 
 
-            <!-- <div class="qr" style="padding-top:540px; padding-left:370px;">
+            <div class="qr" style="padding-top:710px; padding-left:370px;">
                 <img src="{{ asset('qr.png') }}" alt="" height="100px">
-            </div> -->
+            </div>
         </div>
     </div>
 
@@ -245,7 +245,7 @@
         printWindow.onload = function() {
             printWindow.focus(); // Needed for some browsers
             tor.style.display = "none";
-            printWindow.print();            
+            printWindow.print();
             printWindow.close();
             history.back();
         };

@@ -80,16 +80,16 @@
 
                                 <?php $counter = 0; ?>
                                 @foreach($requests as $request)
-                                <?php $counter++ ?>
+                                <?php $counter = $loop->iteration; ?>
                                 <tr class="text-right">
-                                    <td class="text-left">{{ $counter }}</td>
+                                    <td class="text-left">{{ $loop->iteration }}</td>
                                     <td class="text-left">{{ $request->name }}</td>
                                     <td class="text-left">{{ $request->purpose }}</td>
                                     <td class="text-right">{{ $request->copies }}</td>
                                     <td>₱ {{ $request->fee }}</td>
                                     <td>₱ {{ $request->copies * $request->fee }}</td>
                                     @if($request->or_date)
-                                    @php                                    
+                                    @php
                                     $newDate = Carbon::parse($request->or_date)->addDays($request->duration)->toDateString();
                                     @endphp
                                     <td>{{ $newDate }}</td>
@@ -118,6 +118,12 @@
                                                 <option value="" disabled selected>Select</option>
                                                 <option value="For Employement">For Employement</option>
                                                 <option value="For Evaluation">For Evaluation</option>
+                                                <option value="For Scholarship">For Scholarship</option>
+                                                <option value="For Board Exam">For Board Exam</option>
+                                                <option value="For Apprenticeship">For Apprenticeship</option>
+                                                <option value="PNP Application">PNP Application</option>
+                                                <option value="Educational Assitance">Educational Assitance</option>
+                                                <option value="any legal">Any legal purposes</option>
                                             </select>
                                         </td>
                                         <td>
@@ -166,7 +172,8 @@
                                                 <td colspan="2">
                                                     <div class="container-fluid w-100">
                                                         <button type="submit" class="btn btn-primary float-right mt-4 ml-2"><i data-feather="save" class="mr-3 icon-md"></i>Confirmed</button>
-                                                        <a href="#" class="btn btn-outline-primary float-right mt-4"><i data-feather="printer" class="mr-2 icon-md"></i>Print</a>
+                                                        <a href="#" class="btn btn-outline-primary float-right mt-4" data-toggle="modal" data-target="#exampleModalCenter"><i data-feather="printer" class="mr-2 icon-md"></i>Receipt</a>
+                                                        <a href="#" class="btn btn-outline-primary float-right mt-4" data-toggle="modal" data-target="#claimStub"><i data-feather="printer" class="mr-2 icon-md"></i>Claim Stub</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -181,5 +188,182 @@
         </div>
     </div>
 </div>
+
+
+<div class="example">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document" style="width: 230px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Receipt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="receiptContent" style="background-color: white; color: black; font-family: 'Courier New', Courier, monospace; padding: 10px; width: 230px; font-size: 10px;">
+                    <h3 style="text-align: center; margin-bottom: 10px; font-size: 15px;">Payment Request</h3>
+                    <!-- <h3 style="text-align: left; margin-bottom: 10px; font-size: 15px;">Name: {{ $student->lname }}, {{ $student->fname }}</h3> -->
+                    <h3 style="text-align: left; margin-bottom: 10px; font-size: 15px; ">Track No: <u>{{ $student->tracking_no }}</u> </h3>
+
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left; border-bottom: 1px solid #000;">Document Name</th>
+                                <th style="text-align: left; border-bottom: 1px solid #000;">Copies</th>
+                                <th style="text-align: right; border-bottom: 1px solid #000;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $total = 0;
+                            @endphp
+                            @foreach($requests as $request)
+                            <?php $requestTotal = $request->copies * $request->fee; ?>
+                            <tr>
+                                <td style="border-bottom: 1px solid #000; width: 80%; text-align: left; vertical-align: top;">{{ $request->name }}</td>
+                                <td style="border-bottom: 1px solid #000; text-align: center; vertical-align: top;">{{ $request->copies }}</td>
+                                <td style="border-bottom: 1px solid #000; text-align: right; vertical-align: top;">₱{{ number_format($requestTotal, 2) }}</td>
+                            </tr>
+
+                            @php
+                            $total += $requestTotal;
+                            @endphp
+                            @endforeach
+                            <tr>
+                                <td colspan="3" style="border-bottom: 1px solid #000; text-align: right; vertical-align: top;">Total: ₱{{ number_format($total, 2) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="border-top: 2px solid #000; margin-top: 10px; padding-top: 5px;">
+                        <h4 style="text-align: left; margin: 0; font-size: 15px; ">Total: ₱{{ number_format($total, 2) }}</h4>
+                    </div>
+                    <!-- <p style="text-align: center; margin-top: 10px; font-size: 10px;">Thank you!</p> -->
+                    <p style="text-align: left; margin-top: 10px; font-size: 10px;">Step 1: Pay the total amount due at finance office.</p>
+                    <p style="text-align: left; margin-top: 10px; font-size: 10px;">Step 2: Return the reciept at registrar's office after paying.</p>
+                    <p style="text-align: left; margin-top: 10px; font-size: 10px;">Requested By: {{ Auth::user()->name }}</p>
+                    <!-- <p style="text-align: center; margin: 0; font-size: 10px;">Please return the receipt to the registrar's office window 4 to validate your request.</p> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="printReceipt('receiptContent')">Print</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Claim Stub -->
+<div class="example">
+    <!-- Modal -->
+    <div class="modal fade" id="claimStub" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document" style="width: 230px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Receipt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="claimStubContent" style="background-color: white; color: black; font-family: 'Courier New', Courier, monospace; padding: 10px; width: 230px; font-size: 10px;">
+                    <h3 style="text-align: center; margin-bottom: 10px; font-size: 15px;">Claim Stub</h3>
+                    <!-- <h3 style="text-align: left; margin-bottom: 10px; font-size: 15px;">Name: {{ $student->lname }}, {{ $student->fname }}</h3> -->
+                    <h3 style="text-align: left; margin-bottom: 10px; font-size: 15px; ">Track No: <u>{{ $student->tracking_no }}</u> </h3>
+
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left; border-bottom: 1px solid #000;">Document Name</th>
+                                <th style="text-align: left; border-bottom: 1px solid #000;">Release Date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $total = 0;
+                            @endphp
+                            @foreach($requests as $request)
+                            @php
+                            $requestTotal = $request->copies * $request->fee;
+                            @endphp
+                            <tr>
+                                <!-- Document Name Column -->
+                                <td style="border-bottom: 1px solid #000; width: 50%; text-align: left; vertical-align: top;">
+                                    {{ $request->name }}
+                                </td>
+
+                                <!-- OR Date / Duration Column -->
+                                <td style="border-bottom: 1px solid #000; text-align: center; vertical-align: top;">
+                                    @if($request->or_date)
+                                    @php
+                                    $newDate = Carbon::parse($request->or_date)->addDays($request->duration)->toDateString();
+                                    @endphp
+                                    {{ $newDate }}
+                                    @else
+                                    {{ $request->duration }} day(s)
+                                    @endif
+                                </td>
+                            </tr>
+
+                            @php
+                            $total += $requestTotal;
+                            @endphp
+                            @endforeach
+
+                            <!-- Total Row -->
+
+                        </tbody>
+                    </table>
+
+                    <!-- <p style="text-align: center; margin-top: 10px; font-size: 10px;">Thank you!</p> -->
+                    <p style="text-align: left; margin-top: 10px; font-size: 10px;">
+                        Note: Bring this claim stub upon claiming your requested documents. Visit academic office and look for Ma'am Nora Lozano.
+                    </p>
+                    <p style="text-align: left; margin-top: 10px; font-size: 10px;">Requested By: {{ Auth::user()->name }}</p>
+                    <!-- <p style="text-align: center; margin: 0; font-size: 10px;">Please return the receipt to the registrar's office window 4 to validate your request.</p> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="printReceipt('claimStubContent')">Print</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Claim Stub -->
+
+<script>
+    function printReceipt(id) {
+        // Get the modal body content
+        var content = document.getElementById(id).innerHTML;
+
+        // Create a new window for printing
+        var printWindow = window.open('', '', 'height=400,width=300');
+        printWindow.document.write('<html><head><title>Receipt</title>');
+
+        // Include custom styles for the receipt
+        printWindow.document.write('<style>');
+        printWindow.document.write('body { font-family: "Courier New", Courier, monospace; font-size: 10px; margin: 0; padding: 10px 0; display: flex; justify-content: center; }'); // Add padding at top
+        printWindow.document.write('h3, h4 { margin: 0; font-size: 15px; }'); // Adjust header font size
+        printWindow.document.write('table { width: 100%; border-collapse: collapse; }');
+        printWindow.document.write('th, td { padding: 5px; text-align: left; font-size: 10px; }'); // Set table font size
+        printWindow.document.write('td:last-child { text-align: right; }'); // Align total to the right
+        printWindow.document.write('@media print { body { -webkit-print-color-adjust: exact; } }'); // Adjust for print colors
+        printWindow.document.write('</style>');
+
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<div style="width: 230px; margin-top: 10px;">'); // Added margin-top to avoid cutting off text
+        printWindow.document.write(content); // Write the content to the new window
+        printWindow.document.write('</div>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close(); // Close the document
+        printWindow.print(); // Trigger the print dialog
+    }
+</script>
+
 
 @endsection

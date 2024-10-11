@@ -48,15 +48,12 @@
                                 <td>{{ $student->contact }}</td>
                                 <td>{{ $student->email }}</td>
                                 <td>
-                                    <form action="{{ route('store_transaction') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="student_id" value="{{ $student->id }}">
 
-                                        <button type="submit" class="btn btn-success btn-icon-text">
-                                            <i class="btn-icon-prepend" data-feather="plus"></i>
-                                            Request
-                                        </button>
-                                    </form>
+                                    <button type="submit" class="btn btn-success btn-icon-text">
+                                        <i class="btn-icon-prepend" data-feather="folder-open"></i>
+                                        Open
+                                    </button>
+
                                 </td>
                             </tr>
                             @endforeach

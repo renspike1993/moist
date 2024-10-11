@@ -9,9 +9,11 @@
     </div>
 </div>
 <div class="sidebar-body">
-    <ul class="nav">
-        <li class="nav-item nav-category">Main</li>
 
+    <ul class="nav">
+        <!-- admin -->
+        @if(Auth::user()->role_id==1)
+        <li class="nav-item nav-category">Main</li>
         <li class="nav-item">
             <a href="{{ route('dashboard') }}" class="nav-link">
                 <i class="link-icon" data-feather="box"></i>
@@ -42,21 +44,23 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('get_documents') }}" class="nav-link">Search Student</a>
+                        <a href="{{ route('search') }}" class="nav-link">Search Student</a>
                     </li>
                 </ul>
             </div>
         </li>
+        
         <li class="nav-item">
             <a href="{{ route('students') }}" class="nav-link">
                 <i class="link-icon" data-feather="users"></i>
                 <span class="link-title">Students</span>
             </a>
         </li>
+
         <li class="nav-item">
-            <a href="{{ route('requests') }}" class="nav-link">
-                <i class="link-icon" data-feather="layers"></i>
-                <span class="link-title">Requests</span>
+            <a href="{{ route('transactions') }}" class="nav-link">
+                <i class="link-icon" data-feather="refresh-ccw"></i>
+                <span class="link-title">Transactions</span>
             </a>
         </li>
 
@@ -64,11 +68,18 @@
         <li class="nav-item">
             <a href="{{ route('list_tor') }}" class="nav-link">
                 <i class="link-icon" data-feather="layout"></i>
-                <span class="link-title">Enrollments</span>
+                <span class="link-title">Transcript</span>
             </a>
         </li>
-
-        <li class="nav-item nav-category">subordinates</li>
+        <!-- end admin -->
+         @endif
+        <li class="nav-item nav-category">Users</li>
+        <li class="nav-item">
+            <a href="{{ route('request_dates') }}" class="nav-link">
+                <i class="link-icon" data-feather="layout"></i>
+                <span class="link-title">Requests</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a href="{{ route('get_encoder_request') }}" class="nav-link">
                 <i class="link-icon" data-feather="layout"></i>

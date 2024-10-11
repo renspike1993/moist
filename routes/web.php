@@ -50,7 +50,13 @@ Route::middleware('auth')->group(function () {
     // --------------------- Transaction Controller -----------------------------------
 
 
-    Route::get('/requests',                 [TransactionController::class, 'requests'])->name('requests');
+    Route::get('/transactions',                 [TransactionController::class, 'transactions'])->name('transactions');
+    Route::get('/request_dates',                 [TransactionController::class, 'request_dates'])->name('request_dates');
+
+    Route::get('/get_request_by_status/{date}/{status}',                 [TransactionController::class, 'get_request_by_status'])->name('get_request_by_status');
+    Route::post('/update_request_status',                 [TransactionController::class, 'update_request_status'])->name('update_request_status');
+
+    
     Route::get('/get_requests/{id}',        [TransactionController::class, 'get_requests'])->name('get_requests');
 
 
@@ -84,7 +90,7 @@ Route::middleware('auth')->group(function () {
     // -------------------- File Controller ----------------------------------- 
     Route::post('/upload_file',         [FileController::class, 'upload_file'])->name('upload_file');
     Route::get('/download_file/{id,type}',         [Documents::class, 'download_file'])->name('download_file');
-
+    Route::get('/search',         [FileController::class, 'search'])->name('search');
     // -------------------- TorController ---------------------------
     Route::get('/list_tor',         [TorController::class, 'list_tor'])->name('list_tor');
     Route::get('/view-records/{fullname}',              [TorController::class, 'view_tor'])->name('view-records');
