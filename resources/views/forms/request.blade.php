@@ -354,7 +354,7 @@
         printWindow.document.write('td:last-child { text-align: right; }'); // Align total to the right
         printWindow.document.write('@media print { body { -webkit-print-color-adjust: exact; } }'); // Adjust for print colors
         printWindow.document.write('</style>');
-
+ 
         printWindow.document.write('</head><body>');
         printWindow.document.write('<div style="width: 230px; margin-top: 10px;">'); // Added margin-top to avoid cutting off text
         printWindow.document.write(content); // Write the content to the new window
