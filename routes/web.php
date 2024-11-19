@@ -4,8 +4,13 @@ use App\Http\Controllers\Documents;
 use App\Http\Controllers\DataCenterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EncoderController;
+use App\Http\Controllers\FileController;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TorController;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +32,13 @@ Route::get('/', [User::class, 'index'])->middleware(['auth', 'verified'])->name(
 
 Route::middleware('auth')->group(function () {
 
+
+
+
+
+    Route::get('/dashboard', [DashboardController::class, 'summary'])->name('dashboard');
+
+
     Route::get('/change_theme', [User::class, 'change_theme'])->name('change_theme');
 
 
@@ -38,7 +50,13 @@ Route::middleware('auth')->group(function () {
     // --------------------- Transaction Controller -----------------------------------
 
 
-    Route::get('/requests',                 [TransactionController::class, 'requests'])->name('requests');
+    Route::get('/transactions',                 [TransactionController::class, 'transactions'])->name('transactions');
+    Route::get('/request_dates',                 [TransactionController::class, 'request_dates'])->name('request_dates');
+
+    Route::get('/get_request_by_status/{date}/{status}',                 [TransactionController::class, 'get_request_by_status'])->name('get_request_by_status');
+    Route::post('/update_request_status',                 [TransactionController::class, 'update_request_status'])->name('update_request_status');
+
+    
     Route::get('/get_requests/{id}',        [TransactionController::class, 'get_requests'])->name('get_requests');
 
 
@@ -54,24 +72,32 @@ Route::middleware('auth')->group(function () {
     Route::get('/get_folders',             [DataCenterController::class, 'get_folders'])->name('get_folders');
     Route::get('/get_folder_student/{id}',     [DataCenterController::class, 'get_folder_student'])->name('get_folder_student');
 
-
-
     Route::post('/add_student_to_folder',    [DataCenterController::class, 'add_student_to_folder'])->name('add_student_to_folder');
     Route::get('/open_folder/{id}',         [DataCenterController::class, 'open_folder'])->name('open_folder');
-
-
 
     Route::get('/get_specific_cabinet/{id}', [DataCenterController::class, 'get_specific_cabinet'])->name('get_specific_cabinet');
     Route::get('/get_specific_folder/{id}', [DataCenterController::class, 'get_specific_folder'])->name('get_specific_folder');
 
-
-
     Route::post('/create_cabinet',         [DataCenterController::class, 'create_cabinet'])->name('create_cabinet');
     Route::post('/create_folder',         [DataCenterController::class, 'create_folder'])->name('create_folder');
 
-    // --------------------- End Data Center Controller -----------------------------------
-
+    // --------------------- Checker Controller -----------------------------------
+    Route::get('/get_checker_request',         [CheckerController::class, 'get_checker_requests'])->name('get_checker_request');
+    // --------------------- Encoder Controller -----------------------------------
+    Route::get('/get_encoder_request',         [EncoderController::class, 'get_encoder_request'])->name('get_encoder_request');
+    // -------------------- Documents Controller ----------------------------------- 
     Route::get('/get_documents',         [Documents::class, 'get_documents'])->name('get_documents');
+    // -------------------- File Controller ----------------------------------- 
+    Route::post('/upload_file',         [FileController::class, 'upload_file'])->name('upload_file');
+    Route::get('/download_file/{id,type}',         [Documents::class, 'download_file'])->name('download_file');
+    Route::get('/search',         [FileController::class, 'search'])->name('search');
+    // -------------------- TorController ---------------------------
+    Route::get('/list_tor',         [TorController::class, 'list_tor'])->name('list_tor');
+    Route::get('/view-records/{fullname}',              [TorController::class, 'view_tor'])->name('view-records');
+    // Route::get('/view-permanent-records/{fullname}',    [TorController::class, 'get_permanent_records'])->name('view-permanent-records');
+    // Route::get('/view-form9/{fullname}',                [TorController::class, 'view_form9'])->name('view-form9');
+
+
 });
 
 require __DIR__ . '/auth.php';

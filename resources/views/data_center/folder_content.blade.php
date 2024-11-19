@@ -76,13 +76,12 @@
                                 <input type="text" name="midname" class="form-control" required>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-6">
                                 <label for="course">Course</label>
                                 <select name="course" id="course" class="form-control" required>
                                     <option disabled selected>Select Course</option>
-                                    <option value="BSBA">BSIT</option>
+                                    <option value="BSIT">BSIT</option>
                                     <option value="BSBA">BSBA</option>
                                     <option value="BSCRIM">BSCRIM</option>
                                     <option value="BEED">BEED</option>
@@ -93,6 +92,7 @@
                                     <option value="BSOA">BSOA</option>
                                     <option value="BSTM">BSTM</option>
                                     <option value="DHST">DHST</option>
+                                    <option value="BSHRM">BSHRM</option>
                                 </select>
                             </div>
                         </div>

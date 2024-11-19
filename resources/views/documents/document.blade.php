@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $document->name }}</td>
-                                <td>{{ $document->fee }}</td>
+                                <td>₱ {{ $document->fee }} / page</td>
                                 <td>{{ $document->duration }} day(s)</td>                                
                                 <td>
                                     <a href="" class="btn btn-outline-warning">Edit</a>  
